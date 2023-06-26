@@ -5,11 +5,14 @@ let config = {
 	scene: {
 		preload: preload,
 		create: create,
-		update: update
+		update: update,
 	}
 };
 
 let game = new Phaser.Game(config);
+
+const gameWidth = 775;
+const gameHeigt = 540;
 
 function preload() {
 	this.load.spritesheet('player-right', 'assets/right.png', { frameWidth: 64, frameHeight: 128 });
@@ -53,16 +56,16 @@ function create() {
 }
 
 function update() {
-	if (this.cursors.up.isDown) {
+	if (this.cursors.up.isDown && this.player.y > 0) {
 		this.player.y -= 1;
 		this.player.anims.play('back', true);
-	} else if (this.cursors.down.isDown) {
+	} else if (this.cursors.down.isDown && this.player.y < gameHeigt) {
 		this.player.y += 1;
 		this.player.anims.play('front', true);
-	} else if (this.cursors.left.isDown) {
+	} else if (this.cursors.left.isDown && this.player.x > 0) {
 		this.player.x -= 1;
 		this.player.anims.play('left', true);
-	} else if (this.cursors.right.isDown) {
+	} else if (this.cursors.right.isDown && this.player.x < gameWidth) {
 		this.player.x += 1;
 		this.player.anims.play('right', true);
 	} else {
